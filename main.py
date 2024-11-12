@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException
 from contextlib import asynccontextmanager
 from sqlalchemy.orm import Session
-from database import init_db, get_db, engine
+from database import init_db, get_db
 from typing import Optional
 from schemas import OrderCreate, OrderUpdate, OrderResponse
 from crud import create_order, get_order, update_order_status, get_orders
@@ -10,7 +10,7 @@ from currency import get_exchange_rate
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    init_db()
+    engine = await init_db()
     yield
     await engine.dispose()
 
