@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 
 class OrderCreate(BaseModel):
@@ -17,5 +17,4 @@ class OrderResponse(BaseModel):
     converted_amount: Optional[float] = None
     status: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
